@@ -10,9 +10,6 @@ let next_btn = document.querySelector('.next-track');
 let prev_btn = document.querySelector('.prev-track');
 
 let seek_slider = document.querySelector('.seek_slider');
-let seek_slider_thumb_button = document.querySelector(
-  '.seek_slider::-webkit-slider-thumb'
-);
 let volume_slider = document.querySelector('.volume_slider');
 let curr_time = document.querySelector('.current-time');
 let total_duration = document.querySelector('.total-duration');
@@ -90,6 +87,9 @@ function loadTrack(track_index) {
   // using the 'ended' event
   curr_track.addEventListener('ended', nextTrack);
 
+  // Play the track automatically if the player was already playing
+  if (isPlaying) playTrack();
+
   // Apply a random background color
   random_bg_color();
 }
@@ -106,7 +106,10 @@ function random_bg_color() {
 
   // Set the background to the new color
   document.body.style.background = bgColor;
-  seek_slider_thumb_button.setAttribute('style', 'background-color: red');
+  seek_slider.innerHTML =
+    '.seek_slider::-webkit-slider-thumb { background: ' +
+    bgColor +
+    '!important; }';
 }
 
 // Function to reset all values to their default
@@ -245,6 +248,50 @@ function loadPlaylist() {
 
 // Call the loadPlaylist function to display the playlist
 loadPlaylist();
+
+document.getElementById('searchInput').addEventListener('input', function () {
+  let query = this.value.toLowerCase();
+  let matchedTracks = track_list.filter(
+    (track) =>
+      track.name.toLowerCase().includes(query) ||
+      track.artist.toLowerCase().includes(query)
+  );
+
+  displayFilteredTracks(matchedTracks);
+});
+
+function displayFilteredTracks(filteredTracks) {
+  let playlist = document.querySelector('.playlist');
+  playlist.innerHTML = ''; // Clear current playlist
+
+  filteredTracks.forEach((track, index) => {
+    let trackDiv = document.createElement('div');
+    trackDiv.setAttribute('class', 'playlist-item');
+    trackDiv.innerHTML = `
+            <img src="assets/${track.image}" alt="${track.name}" class="playlist-art">
+            <div class="playlist-details">
+                <div class="playlist-name">${track.name}</div>
+                <div class="playlist-artist">${track.artist}</div>
+            </div>
+        `;
+
+    // Add click event to each track in the playlist
+    trackDiv.addEventListener('click', () => {
+      track_index = track_list.indexOf(track);
+      loadTrack(track_index);
+      playTrack();
+    });
+
+    playlist.appendChild(trackDiv);
+  });
+}
+
+// This will reset the playlist view to show all songs when no search query is entered
+document.getElementById('searchInput').addEventListener('search', function () {
+  if (!this.value) {
+    loadPlaylist();
+  }
+});
 
 // Load the first track in the tracklist
 loadTrack(track_index);

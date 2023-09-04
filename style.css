@@ -8,8 +8,8 @@ body {
   transition: background-color 0.5s;
   display: flex;
   flex: 1;
-  gap: 24px;
-  padding: 24px;
+  gap: 20px;
+  padding: 1.5rem;
   height: calc(100vh - 48px);
 }
 
@@ -22,8 +22,8 @@ body {
   flex-direction: column;
   justify-content: center;
   flex: 1;
-  border: 1px solid black;
   border-radius: 16px;
+  background: white;
 }
 
 .details {
@@ -31,7 +31,6 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin-top: 25px;
 }
 
 .track-art {
@@ -51,7 +50,7 @@ body {
 }
 
 .track-name {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-family: 'Rock Salt', cursive;
 }
 
@@ -182,20 +181,26 @@ i.fa-step-backward {
   cursor: pointer;
 }
 
-.playlist {
+.playlist_container {
   flex: 1;
-  border: 1px solid black;
   padding: 16px;
   border-radius: 16px;
+  background: white;
+}
+
+.playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
 }
 
 .playlist-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
   cursor: pointer;
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid #d8d8d8;
   border-radius: 12px;
   transition: background-color 0.3s;
 }
@@ -222,4 +227,120 @@ i.fa-step-backward {
 
 .playlist-artist {
   font-family: 'Cookie', cursive;
+}
+
+.search-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex: 1;
+}
+
+#searchInput {
+  padding: 10px;
+  display: flex;
+  flex: 1;
+  border: 1px solid #d8d8d8;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* Mobile (portrait) styles */
+@media only screen and (max-width: 600px) {
+  body {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    height: auto;
+  }
+
+  .player,
+  .playlist_container {
+    flex: none;
+    padding: 3rem 1rem;
+  }
+
+  .slider_container,
+  .volume_slider_container {
+    width: 90%;
+  }
+
+  .track-art {
+    height: 150px;
+    width: 150px;
+  }
+
+  .track-name {
+    font-size: 2rem;
+  }
+
+  .track-artist,
+  .now-playing {
+    font-size: 1rem;
+  }
+
+  .buttons {
+    gap: 15px;
+  }
+
+  .playpause-track,
+  .prev-track,
+  .next-track {
+    padding: 15px;
+  }
+
+  .seek_slider,
+  .volume_slider {
+    width: 90%;
+  }
+}
+
+/* Tablet (portrait and landscape) styles */
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  body {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    height: auto;
+  }
+
+  .player,
+  .playlist_container {
+    flex: none;
+    padding: 3rem 1rem;
+  }
+
+  .slider_container,
+  .volume_slider_container {
+    width: 90%;
+  }
+
+  .track-art {
+    height: 200px;
+    width: 200px;
+  }
+
+  .track-name {
+    font-size: 2.5rem;
+  }
+
+  .track-artist,
+  .now-playing {
+    font-size: 1.2rem;
+  }
+
+  .buttons {
+    gap: 20px;
+  }
+
+  .playpause-track,
+  .prev-track,
+  .next-track {
+    padding: 20px;
+  }
+
+  .seek_slider,
+  .volume_slider {
+    width: 90%;
+  }
 }
