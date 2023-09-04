@@ -95,6 +95,16 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.volume_slider_container {
+  width: 75%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  margin-top: 1rem;
+}
+
 /* Modify the appearance of the slider */
 .seek_slider,
 .volume_slider {
@@ -204,4 +214,12 @@ i.fa-step-backward {
 
 .playlist-details {
   flex-grow: 1;
+}
+
+.playlist-name {
+  font-family: 'Rock Salt', cursive;
+}
+
+.playlist-artist {
+  font-family: 'Cookie', cursive;
 }
